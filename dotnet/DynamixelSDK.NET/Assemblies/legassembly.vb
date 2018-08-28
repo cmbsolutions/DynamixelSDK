@@ -1,25 +1,56 @@
 ﻿Public Class legassembly
-    Private Sub tbCoxa_Scroll(sender As Object, e As EventArgs) Handles tbCoxa.Scroll
-        nudCoxa.Value = tbCoxa.Value
+    Private _LegId As Integer
+    Public Property LegId() As Integer
+        Get
+            Return _LegId
+        End Get
+        Set(ByVal value As Integer)
+            _LegId = value
+        End Set
+    End Property
+    Public Property LegLocation As eLegLocation
+
+    Public Sub setIds(coxaID As Integer, femurID As Integer, tibiaID As Integer, LegLoc As eLegLocation)
+        Servo1.servoId = coxaID
+        Servo1.servoName = renameLegLocation() & " Coxa"
+        Servo2.servoId = femurID
+        Servo2.servoName = renameLegLocation() & " Femur"
+        Servo3.servoId = tibiaID
+        Servo3.servoName = renameLegLocation() & " Tibia"
+
+        lblCaption.Text = "Legposition: " & LegLocation.ToString
     End Sub
 
-    Private Sub nudCoxa_ValueChanged(sender As Object, e As EventArgs) Handles nudCoxa.ValueChanged
-        tbCoxa.Value = nudCoxa.Value
-    End Sub
+    Public Function getServos() As List(Of servo_ui)
+        Return New List(Of servo_ui)({Servo1, Servo2, Servo3})
+    End Function
 
-    Private Sub tbFemur_Scroll(sender As Object, e As EventArgs) Handles tbFemur.Scroll
-        nudFemur.Value = tbFemur.Value
-    End Sub
+    Private Function renameLegLocation() As String
+        Select Case LegLocation
+            Case eLegLocation.LeftFront
+                Return "LF"
+            Case eLegLocation.LeftMiddle
+                Return "LM"
+            Case eLegLocation.LeftRear
+                Return "LR"
+            Case eLegLocation.RightFront
+                Return "RF"
+            Case eLegLocation.RightMiddle
+                Return "RM"
+            Case eLegLocation.RightRear
+                Return "RR"
+            Case Else
+                Return ""
+        End Select
+    End Function
 
-    Private Sub nudFemur_ValueChanged(sender As Object, e As EventArgs) Handles nudFemur.ValueChanged
-        tbFemur.Value = nudFemur.Value
-    End Sub
-
-    Private Sub tbTibia_Scroll(sender As Object, e As EventArgs) Handles tbTibia.Scroll
-        nudTibia.Value = tbTibia.Value
-    End Sub
-
-    Private Sub nudTibia_ValueChanged(sender As Object, e As EventArgs) Handles nudTibia.ValueChanged
-        tbTibia.Value = nudTibia.Value
-    End Sub
 End Class
+
+Public Enum eLegLocation
+    LeftFront
+    LeftMiddle
+    LeftRear
+    RightFront
+    RightMiddle
+    RightRear
+End Enum
