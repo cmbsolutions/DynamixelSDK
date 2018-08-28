@@ -13,10 +13,13 @@
     Public Sub setIds(coxaID As Integer, femurID As Integer, tibiaID As Integer, LegLoc As eLegLocation)
         Servo1.servoId = coxaID
         Servo1.servoName = renameLegLocation() & " Coxa"
+        Servo1.servoJoint = eJoint.Coxa
         Servo2.servoId = femurID
         Servo2.servoName = renameLegLocation() & " Femur"
+        Servo2.servoJoint = eJoint.Femur
         Servo3.servoId = tibiaID
         Servo3.servoName = renameLegLocation() & " Tibia"
+        Servo3.servoJoint = eJoint.Tibia
 
         lblCaption.Text = "Legposition: " & LegLocation.ToString
     End Sub
@@ -53,4 +56,10 @@ Public Enum eLegLocation
     RightFront
     RightMiddle
     RightRear
+End Enum
+
+Public Enum eJoint
+    Coxa
+    Femur
+    Tibia
 End Enum

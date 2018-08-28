@@ -119,4 +119,32 @@ Public Class main
         My.Settings.lastBaud = cboBaud.SelectedItem.ToString
         My.Settings.Save()
     End Sub
+
+    Private Sub btnMirrorLR2RR_Click(sender As Object, e As EventArgs) Handles btnMirrorLR2RR.Click
+        Try
+            For Each servo In Legassembly2.getServos
+                Dim otherServo = Legassembly1.getServos.FirstOrDefault(Function(x) x.servoJoint = servo.servoJoint)
+
+                If otherServo IsNot Nothing Then
+                    otherServo.servoPosition = 512 + (512 - servo.servoPosition)
+                End If
+            Next
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
+
+    Private Sub btnMirrorRR2LR_Click(sender As Object, e As EventArgs) Handles btnMirrorRR2LR.Click
+        Try
+            For Each servo In Legassembly1.getServos
+                Dim otherServo = Legassembly2.getServos.FirstOrDefault(Function(x) x.servoJoint = servo.servoJoint)
+
+                If otherServo IsNot Nothing Then
+                    otherServo.servoPosition = 512 + (512 - servo.servoPosition)
+                End If
+            Next
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
 End Class

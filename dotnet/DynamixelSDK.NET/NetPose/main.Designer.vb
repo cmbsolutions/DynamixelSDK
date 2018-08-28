@@ -24,17 +24,10 @@ Partial Class main
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Legassembly6 = New Assemblies.legassembly()
-        Me.Legassembly5 = New Assemblies.legassembly()
-        Me.Legassembly4 = New Assemblies.legassembly()
-        Me.Legassembly3 = New Assemblies.legassembly()
-        Me.Legassembly2 = New Assemblies.legassembly()
-        Me.Legassembly1 = New Assemblies.legassembly()
         Me.cmdReadPosAll = New System.Windows.Forms.Button()
         Me.cmdTorqueOn = New System.Windows.Forms.Button()
         Me.cmdTorqueOff = New System.Windows.Forms.Button()
@@ -43,16 +36,26 @@ Partial Class main
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.LabelItem1 = New DevComponents.DotNetBar.LabelItem()
         Me.cboPort = New DevComponents.DotNetBar.ComboBoxItem()
-        Me.btnReloadPorts = New DevComponents.DotNetBar.ButtonItem()
         Me.LabelItem2 = New DevComponents.DotNetBar.LabelItem()
         Me.cboBaud = New DevComponents.DotNetBar.ComboBoxItem()
         Me.btnConnect = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMirrorLR2RR = New System.Windows.Forms.Button()
+        Me.btnReloadPorts = New DevComponents.DotNetBar.ButtonItem()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnMirrorRR2LR = New System.Windows.Forms.Button()
+        Me.Legassembly6 = New Assemblies.legassembly()
+        Me.Legassembly5 = New Assemblies.legassembly()
+        Me.Legassembly4 = New Assemblies.legassembly()
+        Me.Legassembly3 = New Assemblies.legassembly()
+        Me.Legassembly2 = New Assemblies.legassembly()
+        Me.Legassembly1 = New Assemblies.legassembly()
         Me.Panel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -62,22 +65,8 @@ Partial Class main
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(498, 489)
+        Me.Panel1.Size = New System.Drawing.Size(498, 540)
         Me.Panel1.TabIndex = 7
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.ErrorImage = Nothing
-        Me.PictureBox1.Image = Global.NetPose.My.Resources.Resources.servonum
-        Me.PictureBox1.InitialImage = Nothing
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(498, 489)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
         '
         'TabControl1
         '
@@ -88,7 +77,7 @@ Partial Class main
         Me.TabControl1.Location = New System.Drawing.Point(900, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(512, 524)
+        Me.TabControl1.Size = New System.Drawing.Size(512, 575)
         Me.TabControl1.TabIndex = 16
         '
         'TabPage1
@@ -97,7 +86,7 @@ Partial Class main
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(504, 495)
+        Me.TabPage1.Size = New System.Drawing.Size(504, 546)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Console"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -113,7 +102,7 @@ Partial Class main
         Me.RichTextBox1.Location = New System.Drawing.Point(3, 3)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(498, 489)
+        Me.RichTextBox1.Size = New System.Drawing.Size(498, 540)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
@@ -123,92 +112,14 @@ Partial Class main
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(504, 495)
+        Me.TabPage2.Size = New System.Drawing.Size(504, 546)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "PhantomX ID''s"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'Legassembly6
-        '
-        Me.Legassembly6.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-        Me.Legassembly6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Legassembly6.LegId = 1
-        Me.Legassembly6.LegLocation = Assemblies.eLegLocation.LeftFront
-        Me.Legassembly6.Location = New System.Drawing.Point(604, 37)
-        Me.Legassembly6.MaximumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly6.MinimumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly6.Name = "Legassembly6"
-        Me.Legassembly6.Size = New System.Drawing.Size(290, 203)
-        Me.Legassembly6.TabIndex = 13
-        '
-        'Legassembly5
-        '
-        Me.Legassembly5.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-        Me.Legassembly5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Legassembly5.LegId = 2
-        Me.Legassembly5.LegLocation = Assemblies.eLegLocation.RightFront
-        Me.Legassembly5.Location = New System.Drawing.Point(604, 246)
-        Me.Legassembly5.MaximumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly5.MinimumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly5.Name = "Legassembly5"
-        Me.Legassembly5.Size = New System.Drawing.Size(290, 203)
-        Me.Legassembly5.TabIndex = 12
-        '
-        'Legassembly4
-        '
-        Me.Legassembly4.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-        Me.Legassembly4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Legassembly4.LegId = 3
-        Me.Legassembly4.LegLocation = Assemblies.eLegLocation.LeftMiddle
-        Me.Legassembly4.Location = New System.Drawing.Point(308, 37)
-        Me.Legassembly4.MaximumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly4.MinimumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly4.Name = "Legassembly4"
-        Me.Legassembly4.Size = New System.Drawing.Size(290, 203)
-        Me.Legassembly4.TabIndex = 11
-        '
-        'Legassembly3
-        '
-        Me.Legassembly3.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-        Me.Legassembly3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Legassembly3.LegId = 4
-        Me.Legassembly3.LegLocation = Assemblies.eLegLocation.RightMiddle
-        Me.Legassembly3.Location = New System.Drawing.Point(308, 246)
-        Me.Legassembly3.MaximumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly3.MinimumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly3.Name = "Legassembly3"
-        Me.Legassembly3.Size = New System.Drawing.Size(290, 203)
-        Me.Legassembly3.TabIndex = 10
-        '
-        'Legassembly2
-        '
-        Me.Legassembly2.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-        Me.Legassembly2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Legassembly2.LegId = 5
-        Me.Legassembly2.LegLocation = Assemblies.eLegLocation.LeftRear
-        Me.Legassembly2.Location = New System.Drawing.Point(12, 37)
-        Me.Legassembly2.MaximumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly2.MinimumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly2.Name = "Legassembly2"
-        Me.Legassembly2.Size = New System.Drawing.Size(290, 203)
-        Me.Legassembly2.TabIndex = 9
-        '
-        'Legassembly1
-        '
-        Me.Legassembly1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-        Me.Legassembly1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Legassembly1.LegId = 6
-        Me.Legassembly1.LegLocation = Assemblies.eLegLocation.RightRear
-        Me.Legassembly1.Location = New System.Drawing.Point(12, 246)
-        Me.Legassembly1.MaximumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly1.MinimumSize = New System.Drawing.Size(290, 203)
-        Me.Legassembly1.Name = "Legassembly1"
-        Me.Legassembly1.Size = New System.Drawing.Size(290, 203)
-        Me.Legassembly1.TabIndex = 8
-        '
         'cmdReadPosAll
         '
-        Me.cmdReadPosAll.Location = New System.Drawing.Point(12, 455)
+        Me.cmdReadPosAll.Location = New System.Drawing.Point(12, 550)
         Me.cmdReadPosAll.Name = "cmdReadPosAll"
         Me.cmdReadPosAll.Size = New System.Drawing.Size(104, 23)
         Me.cmdReadPosAll.TabIndex = 17
@@ -217,7 +128,7 @@ Partial Class main
         '
         'cmdTorqueOn
         '
-        Me.cmdTorqueOn.Location = New System.Drawing.Point(122, 455)
+        Me.cmdTorqueOn.Location = New System.Drawing.Point(122, 550)
         Me.cmdTorqueOn.Name = "cmdTorqueOn"
         Me.cmdTorqueOn.Size = New System.Drawing.Size(75, 23)
         Me.cmdTorqueOn.TabIndex = 18
@@ -226,7 +137,7 @@ Partial Class main
         '
         'cmdTorqueOff
         '
-        Me.cmdTorqueOff.Location = New System.Drawing.Point(203, 455)
+        Me.cmdTorqueOff.Location = New System.Drawing.Point(203, 550)
         Me.cmdTorqueOff.Name = "cmdTorqueOff"
         Me.cmdTorqueOff.Size = New System.Drawing.Size(75, 23)
         Me.cmdTorqueOff.TabIndex = 19
@@ -271,12 +182,6 @@ Partial Class main
         Me.cboPort.ItemHeight = 18
         Me.cboPort.Name = "cboPort"
         '
-        'btnReloadPorts
-        '
-        Me.btnReloadPorts.Image = Global.NetPose.My.Resources.Resources.arrow_refresh
-        Me.btnReloadPorts.Name = "btnReloadPorts"
-        Me.btnReloadPorts.Text = "ButtonItem1"
-        '
         'LabelItem2
         '
         Me.LabelItem2.Name = "LabelItem2"
@@ -293,11 +198,131 @@ Partial Class main
         Me.btnConnect.Name = "btnConnect"
         Me.btnConnect.Text = "Connect"
         '
+        'btnMirrorLR2RR
+        '
+        Me.btnMirrorLR2RR.Image = Global.NetPose.My.Resources.Resources.arrow_down
+        Me.btnMirrorLR2RR.Location = New System.Drawing.Point(93, 246)
+        Me.btnMirrorLR2RR.Name = "btnMirrorLR2RR"
+        Me.btnMirrorLR2RR.Size = New System.Drawing.Size(24, 24)
+        Me.btnMirrorLR2RR.TabIndex = 21
+        Me.ToolTip1.SetToolTip(Me.btnMirrorLR2RR, "Mirror")
+        Me.btnMirrorLR2RR.UseVisualStyleBackColor = True
+        '
+        'btnReloadPorts
+        '
+        Me.btnReloadPorts.Image = Global.NetPose.My.Resources.Resources.arrow_refresh
+        Me.btnReloadPorts.Name = "btnReloadPorts"
+        Me.btnReloadPorts.Text = "ButtonItem1"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.ErrorImage = Nothing
+        Me.PictureBox1.Image = Global.NetPose.My.Resources.Resources.servonum
+        Me.PictureBox1.InitialImage = Nothing
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(498, 540)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
+        'btnMirrorRR2LR
+        '
+        Me.btnMirrorRR2LR.Image = Global.NetPose.My.Resources.Resources.arrow_up
+        Me.btnMirrorRR2LR.Location = New System.Drawing.Point(122, 246)
+        Me.btnMirrorRR2LR.Name = "btnMirrorRR2LR"
+        Me.btnMirrorRR2LR.Size = New System.Drawing.Size(24, 24)
+        Me.btnMirrorRR2LR.TabIndex = 22
+        Me.ToolTip1.SetToolTip(Me.btnMirrorRR2LR, "Mirror")
+        Me.btnMirrorRR2LR.UseVisualStyleBackColor = True
+        '
+        'Legassembly6
+        '
+        Me.Legassembly6.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
+        Me.Legassembly6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Legassembly6.LegId = 1
+        Me.Legassembly6.LegLocation = Assemblies.eLegLocation.LeftFront
+        Me.Legassembly6.Location = New System.Drawing.Point(604, 37)
+        Me.Legassembly6.MaximumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly6.MinimumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly6.Name = "Legassembly6"
+        Me.Legassembly6.Size = New System.Drawing.Size(290, 203)
+        Me.Legassembly6.TabIndex = 13
+        '
+        'Legassembly5
+        '
+        Me.Legassembly5.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
+        Me.Legassembly5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Legassembly5.LegId = 2
+        Me.Legassembly5.LegLocation = Assemblies.eLegLocation.RightFront
+        Me.Legassembly5.Location = New System.Drawing.Point(604, 282)
+        Me.Legassembly5.MaximumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly5.MinimumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly5.Name = "Legassembly5"
+        Me.Legassembly5.Size = New System.Drawing.Size(290, 203)
+        Me.Legassembly5.TabIndex = 12
+        '
+        'Legassembly4
+        '
+        Me.Legassembly4.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
+        Me.Legassembly4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Legassembly4.LegId = 3
+        Me.Legassembly4.LegLocation = Assemblies.eLegLocation.LeftMiddle
+        Me.Legassembly4.Location = New System.Drawing.Point(308, 37)
+        Me.Legassembly4.MaximumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly4.MinimumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly4.Name = "Legassembly4"
+        Me.Legassembly4.Size = New System.Drawing.Size(290, 203)
+        Me.Legassembly4.TabIndex = 11
+        '
+        'Legassembly3
+        '
+        Me.Legassembly3.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
+        Me.Legassembly3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Legassembly3.LegId = 4
+        Me.Legassembly3.LegLocation = Assemblies.eLegLocation.RightMiddle
+        Me.Legassembly3.Location = New System.Drawing.Point(308, 282)
+        Me.Legassembly3.MaximumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly3.MinimumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly3.Name = "Legassembly3"
+        Me.Legassembly3.Size = New System.Drawing.Size(290, 203)
+        Me.Legassembly3.TabIndex = 10
+        '
+        'Legassembly2
+        '
+        Me.Legassembly2.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
+        Me.Legassembly2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Legassembly2.LegId = 5
+        Me.Legassembly2.LegLocation = Assemblies.eLegLocation.LeftRear
+        Me.Legassembly2.Location = New System.Drawing.Point(12, 37)
+        Me.Legassembly2.MaximumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly2.MinimumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly2.Name = "Legassembly2"
+        Me.Legassembly2.Size = New System.Drawing.Size(290, 203)
+        Me.Legassembly2.TabIndex = 9
+        '
+        'Legassembly1
+        '
+        Me.Legassembly1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
+        Me.Legassembly1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Legassembly1.LegId = 6
+        Me.Legassembly1.LegLocation = Assemblies.eLegLocation.RightRear
+        Me.Legassembly1.Location = New System.Drawing.Point(12, 282)
+        Me.Legassembly1.MaximumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly1.MinimumSize = New System.Drawing.Size(290, 203)
+        Me.Legassembly1.Name = "Legassembly1"
+        Me.Legassembly1.Size = New System.Drawing.Size(290, 203)
+        Me.Legassembly1.TabIndex = 8
+        '
         'main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1412, 524)
+        Me.ClientSize = New System.Drawing.Size(1412, 575)
+        Me.Controls.Add(Me.btnMirrorRR2LR)
+        Me.Controls.Add(Me.btnMirrorLR2RR)
         Me.Controls.Add(Me.Bar1)
         Me.Controls.Add(Me.cmdTorqueOff)
         Me.Controls.Add(Me.cmdTorqueOn)
@@ -316,11 +341,11 @@ Partial Class main
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NetPose"
         Me.Panel1.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -349,4 +374,7 @@ Partial Class main
     Friend WithEvents cboBaud As DevComponents.DotNetBar.ComboBoxItem
     Friend WithEvents btnReloadPorts As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnConnect As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnMirrorLR2RR As Button
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents btnMirrorRR2LR As Button
 End Class

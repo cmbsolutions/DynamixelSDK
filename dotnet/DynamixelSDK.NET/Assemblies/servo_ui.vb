@@ -4,6 +4,9 @@
     Private _servoName As String
     Private _servoPosition As Integer
     Public Property servoId() As Integer
+
+    Public Property servoJoint As eJoint
+
     Public Property servoName() As String
         Get
             Return _servoName
@@ -69,6 +72,7 @@
         _TorqueEnabled = enabled
         torque.Visible = enabled
     End Sub
+
 End Class
 
 Public Class PositionChangedEventArgs

@@ -172,6 +172,24 @@
   <ItemGroup>
     <None Include="Resources\arrow_refresh.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shape_flip_vertical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shape_flip_horizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_down.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>cd $(ProjectDir)
