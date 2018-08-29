@@ -147,4 +147,64 @@ Public Class main
             FormHelpers.dumpException(ex)
         End Try
     End Sub
+
+    Private Sub btnWrite_Click(sender As Object, e As EventArgs) Handles btnWrite.Click
+        robo.WritePositions()
+    End Sub
+
+    Private Sub btnMirrorLM2RM_Click(sender As Object, e As EventArgs) Handles btnMirrorLM2RM.Click
+        Try
+            For Each servo In Legassembly4.getServos
+                Dim otherServo = Legassembly3.getServos.FirstOrDefault(Function(x) x.servoJoint = servo.servoJoint)
+
+                If otherServo IsNot Nothing Then
+                    otherServo.servoPosition = 512 + (512 - servo.servoPosition)
+                End If
+            Next
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
+
+    Private Sub btnMirrorRM2LM_Click(sender As Object, e As EventArgs) Handles btnMirrorRM2LM.Click
+        Try
+            For Each servo In Legassembly3.getServos
+                Dim otherServo = Legassembly4.getServos.FirstOrDefault(Function(x) x.servoJoint = servo.servoJoint)
+
+                If otherServo IsNot Nothing Then
+                    otherServo.servoPosition = 512 + (512 - servo.servoPosition)
+                End If
+            Next
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
+
+    Private Sub btnMirrorLF2RF_Click(sender As Object, e As EventArgs) Handles btnMirrorLF2RF.Click
+        Try
+            For Each servo In Legassembly6.getServos
+                Dim otherServo = Legassembly5.getServos.FirstOrDefault(Function(x) x.servoJoint = servo.servoJoint)
+
+                If otherServo IsNot Nothing Then
+                    otherServo.servoPosition = 512 + (512 - servo.servoPosition)
+                End If
+            Next
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
+
+    Private Sub btnMirrorRF2LF_Click(sender As Object, e As EventArgs) Handles btnMirrorRF2LF.Click
+        Try
+            For Each servo In Legassembly5.getServos
+                Dim otherServo = Legassembly6.getServos.FirstOrDefault(Function(x) x.servoJoint = servo.servoJoint)
+
+                If otherServo IsNot Nothing Then
+                    otherServo.servoPosition = 512 + (512 - servo.servoPosition)
+                End If
+            Next
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
 End Class

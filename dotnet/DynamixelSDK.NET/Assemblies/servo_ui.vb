@@ -17,6 +17,9 @@
         End Set
     End Property
 
+    Public Property servoGoalPosition As UInt16
+    Public Property servoPresentPosition As UInt16
+
     Public Property servoPosition() As Integer
         Get
             Return _servoPosition

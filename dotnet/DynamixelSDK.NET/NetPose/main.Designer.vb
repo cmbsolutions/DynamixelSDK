@@ -24,6 +24,7 @@ Partial Class main
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
@@ -36,12 +37,11 @@ Partial Class main
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.LabelItem1 = New DevComponents.DotNetBar.LabelItem()
         Me.cboPort = New DevComponents.DotNetBar.ComboBoxItem()
+        Me.btnReloadPorts = New DevComponents.DotNetBar.ButtonItem()
         Me.LabelItem2 = New DevComponents.DotNetBar.LabelItem()
         Me.cboBaud = New DevComponents.DotNetBar.ComboBoxItem()
         Me.btnConnect = New DevComponents.DotNetBar.ButtonItem()
         Me.btnMirrorLR2RR = New System.Windows.Forms.Button()
-        Me.btnReloadPorts = New DevComponents.DotNetBar.ButtonItem()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnMirrorRR2LR = New System.Windows.Forms.Button()
         Me.Legassembly6 = New Assemblies.legassembly()
@@ -50,12 +50,23 @@ Partial Class main
         Me.Legassembly3 = New Assemblies.legassembly()
         Me.Legassembly2 = New Assemblies.legassembly()
         Me.Legassembly1 = New Assemblies.legassembly()
+        Me.btnWrite = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnMirrorRM2LM = New System.Windows.Forms.Button()
+        Me.btnMirrorLM2RM = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnMirrorRF2LF = New System.Windows.Forms.Button()
+        Me.btnMirrorLF2RF = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -67,6 +78,20 @@ Partial Class main
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(498, 540)
         Me.Panel1.TabIndex = 7
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.ErrorImage = Nothing
+        Me.PictureBox1.Image = Global.NetPose.My.Resources.Resources.servonum
+        Me.PictureBox1.InitialImage = Nothing
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(498, 540)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
         '
         'TabControl1
         '
@@ -128,7 +153,7 @@ Partial Class main
         '
         'cmdTorqueOn
         '
-        Me.cmdTorqueOn.Location = New System.Drawing.Point(122, 550)
+        Me.cmdTorqueOn.Location = New System.Drawing.Point(122, 521)
         Me.cmdTorqueOn.Name = "cmdTorqueOn"
         Me.cmdTorqueOn.Size = New System.Drawing.Size(75, 23)
         Me.cmdTorqueOn.TabIndex = 18
@@ -137,7 +162,7 @@ Partial Class main
         '
         'cmdTorqueOff
         '
-        Me.cmdTorqueOff.Location = New System.Drawing.Point(203, 550)
+        Me.cmdTorqueOff.Location = New System.Drawing.Point(122, 550)
         Me.cmdTorqueOff.Name = "cmdTorqueOff"
         Me.cmdTorqueOff.Size = New System.Drawing.Size(75, 23)
         Me.cmdTorqueOff.TabIndex = 19
@@ -182,6 +207,12 @@ Partial Class main
         Me.cboPort.ItemHeight = 18
         Me.cboPort.Name = "cboPort"
         '
+        'btnReloadPorts
+        '
+        Me.btnReloadPorts.Image = Global.NetPose.My.Resources.Resources.arrow_refresh
+        Me.btnReloadPorts.Name = "btnReloadPorts"
+        Me.btnReloadPorts.Text = "ButtonItem1"
+        '
         'LabelItem2
         '
         Me.LabelItem2.Name = "LabelItem2"
@@ -200,40 +231,24 @@ Partial Class main
         '
         'btnMirrorLR2RR
         '
+        Me.btnMirrorLR2RR.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnMirrorLR2RR.Image = Global.NetPose.My.Resources.Resources.arrow_down
-        Me.btnMirrorLR2RR.Location = New System.Drawing.Point(93, 246)
+        Me.btnMirrorLR2RR.Location = New System.Drawing.Point(2, 2)
+        Me.btnMirrorLR2RR.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMirrorLR2RR.Name = "btnMirrorLR2RR"
-        Me.btnMirrorLR2RR.Size = New System.Drawing.Size(24, 24)
+        Me.btnMirrorLR2RR.Size = New System.Drawing.Size(25, 26)
         Me.btnMirrorLR2RR.TabIndex = 21
         Me.ToolTip1.SetToolTip(Me.btnMirrorLR2RR, "Mirror")
         Me.btnMirrorLR2RR.UseVisualStyleBackColor = True
         '
-        'btnReloadPorts
-        '
-        Me.btnReloadPorts.Image = Global.NetPose.My.Resources.Resources.arrow_refresh
-        Me.btnReloadPorts.Name = "btnReloadPorts"
-        Me.btnReloadPorts.Text = "ButtonItem1"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.ErrorImage = Nothing
-        Me.PictureBox1.Image = Global.NetPose.My.Resources.Resources.servonum
-        Me.PictureBox1.InitialImage = Nothing
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(498, 540)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
         'btnMirrorRR2LR
         '
+        Me.btnMirrorRR2LR.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnMirrorRR2LR.Image = Global.NetPose.My.Resources.Resources.arrow_up
-        Me.btnMirrorRR2LR.Location = New System.Drawing.Point(122, 246)
+        Me.btnMirrorRR2LR.Location = New System.Drawing.Point(31, 2)
+        Me.btnMirrorRR2LR.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMirrorRR2LR.Name = "btnMirrorRR2LR"
-        Me.btnMirrorRR2LR.Size = New System.Drawing.Size(24, 24)
+        Me.btnMirrorRR2LR.Size = New System.Drawing.Size(25, 26)
         Me.btnMirrorRR2LR.TabIndex = 22
         Me.ToolTip1.SetToolTip(Me.btnMirrorRR2LR, "Mirror")
         Me.btnMirrorRR2LR.UseVisualStyleBackColor = True
@@ -316,13 +331,123 @@ Partial Class main
         Me.Legassembly1.Size = New System.Drawing.Size(290, 203)
         Me.Legassembly1.TabIndex = 8
         '
+        'btnWrite
+        '
+        Me.btnWrite.Location = New System.Drawing.Point(13, 521)
+        Me.btnWrite.Name = "btnWrite"
+        Me.btnWrite.Size = New System.Drawing.Size(104, 23)
+        Me.btnWrite.TabIndex = 23
+        Me.btnWrite.Text = "Write positions"
+        Me.btnWrite.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 3
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.btnMirrorRR2LR, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.btnMirrorLR2RR, 0, 0)
+        Me.TableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 246)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(290, 30)
+        Me.TableLayoutPanel1.TabIndex = 24
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 3
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel2.Controls.Add(Me.btnMirrorRM2LM, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnMirrorLM2RM, 0, 0)
+        Me.TableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(308, 246)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(290, 30)
+        Me.TableLayoutPanel2.TabIndex = 25
+        '
+        'btnMirrorRM2LM
+        '
+        Me.btnMirrorRM2LM.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnMirrorRM2LM.Image = Global.NetPose.My.Resources.Resources.arrow_up
+        Me.btnMirrorRM2LM.Location = New System.Drawing.Point(31, 2)
+        Me.btnMirrorRM2LM.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMirrorRM2LM.Name = "btnMirrorRM2LM"
+        Me.btnMirrorRM2LM.Size = New System.Drawing.Size(25, 26)
+        Me.btnMirrorRM2LM.TabIndex = 22
+        Me.ToolTip1.SetToolTip(Me.btnMirrorRM2LM, "Mirror")
+        Me.btnMirrorRM2LM.UseVisualStyleBackColor = True
+        '
+        'btnMirrorLM2RM
+        '
+        Me.btnMirrorLM2RM.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnMirrorLM2RM.Image = Global.NetPose.My.Resources.Resources.arrow_down
+        Me.btnMirrorLM2RM.Location = New System.Drawing.Point(2, 2)
+        Me.btnMirrorLM2RM.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMirrorLM2RM.Name = "btnMirrorLM2RM"
+        Me.btnMirrorLM2RM.Size = New System.Drawing.Size(25, 26)
+        Me.btnMirrorLM2RM.TabIndex = 21
+        Me.ToolTip1.SetToolTip(Me.btnMirrorLM2RM, "Mirror")
+        Me.btnMirrorLM2RM.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 3
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.Controls.Add(Me.btnMirrorRF2LF, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnMirrorLF2RF, 0, 0)
+        Me.TableLayoutPanel3.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(604, 246)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 1
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(290, 30)
+        Me.TableLayoutPanel3.TabIndex = 26
+        '
+        'btnMirrorRF2LF
+        '
+        Me.btnMirrorRF2LF.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnMirrorRF2LF.Image = Global.NetPose.My.Resources.Resources.arrow_up
+        Me.btnMirrorRF2LF.Location = New System.Drawing.Point(31, 2)
+        Me.btnMirrorRF2LF.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMirrorRF2LF.Name = "btnMirrorRF2LF"
+        Me.btnMirrorRF2LF.Size = New System.Drawing.Size(25, 26)
+        Me.btnMirrorRF2LF.TabIndex = 22
+        Me.ToolTip1.SetToolTip(Me.btnMirrorRF2LF, "Mirror")
+        Me.btnMirrorRF2LF.UseVisualStyleBackColor = True
+        '
+        'btnMirrorLF2RF
+        '
+        Me.btnMirrorLF2RF.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnMirrorLF2RF.Image = Global.NetPose.My.Resources.Resources.arrow_down
+        Me.btnMirrorLF2RF.Location = New System.Drawing.Point(2, 2)
+        Me.btnMirrorLF2RF.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMirrorLF2RF.Name = "btnMirrorLF2RF"
+        Me.btnMirrorLF2RF.Size = New System.Drawing.Size(25, 26)
+        Me.btnMirrorLF2RF.TabIndex = 21
+        Me.ToolTip1.SetToolTip(Me.btnMirrorLF2RF, "Mirror")
+        Me.btnMirrorLF2RF.UseVisualStyleBackColor = True
+        '
         'main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1412, 575)
-        Me.Controls.Add(Me.btnMirrorRR2LR)
-        Me.Controls.Add(Me.btnMirrorLR2RR)
+        Me.Controls.Add(Me.TableLayoutPanel3)
+        Me.Controls.Add(Me.TableLayoutPanel2)
+        Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.Controls.Add(Me.btnWrite)
         Me.Controls.Add(Me.Bar1)
         Me.Controls.Add(Me.cmdTorqueOff)
         Me.Controls.Add(Me.cmdTorqueOn)
@@ -341,11 +466,14 @@ Partial Class main
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NetPose"
         Me.Panel1.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -377,4 +505,12 @@ Partial Class main
     Friend WithEvents btnMirrorLR2RR As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents btnMirrorRR2LR As Button
+    Friend WithEvents btnWrite As Button
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents btnMirrorRM2LM As Button
+    Friend WithEvents btnMirrorLM2RM As Button
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents btnMirrorRF2LF As Button
+    Friend WithEvents btnMirrorLF2RF As Button
 End Class

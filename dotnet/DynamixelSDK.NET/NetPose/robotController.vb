@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.ComponentModel
+Imports System.Runtime.InteropServices
 Imports DynamixelSDK.NET.dynamixel_sdk
 Public Class robotController
     Public Const ADDR_AX_TORQUE_ENABLE As Integer = 24 ' Control table address is different in Dynamixel model
@@ -24,11 +25,12 @@ Public Class robotController
     Public WithEvents acts As List(Of Assemblies.servo_ui)
     Public WithEvents lgs As List(Of Assemblies.legassembly)
 
+    Private _bgWorker As BackgroundWorker
+
+
     Private dxl_port_num As Integer
     Private dxl_comm_result As Integer = COMM_TX_FAIL
-    Private dxl_goal_position() As UInt16 = {DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE}
     Private dxl_error As Byte = 0
-    Private dxl_present_position As UInt16 = 0
 
     Sub New(ByVal port As String, ByVal baud As Integer, ByRef actuators As List(Of Assemblies.servo_ui), ByRef legs As List(Of Assemblies.legassembly))
         Try
@@ -37,9 +39,45 @@ Public Class robotController
             acts = actuators
             lgs = legs
 
+            _bgWorker = New BackgroundWorker With {.WorkerReportsProgress = True, .WorkerSupportsCancellation = True}
+            AddHandler _bgWorker.DoWork, AddressOf DoBackgroundPorcessing
+
             dxl_port_num = dynamixel.portHandler(CommPort)
             dynamixel.packetHandler()
 
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+        End Try
+    End Sub
+
+    Private Sub DoBackgroundPorcessing(sender As Object, e As DoWorkEventArgs)
+        Try
+            Dim stillMoving As Boolean = True
+
+            Do
+                For Each actuator In acts.OrderBy(Function(x) x.servoId)
+                    actuator.servoPresentPosition = dynamixel.read2ByteTxRx(dxl_port_num, PROTOCOL_VERSION, Convert.ToByte(actuator.servoId), ADDR_AX_PRESENT_POSITION)
+                    dxl_comm_result = dynamixel.getLastTxRxResult(dxl_port_num, PROTOCOL_VERSION)
+
+                    If dxl_comm_result <> COMM_SUCCESS Then
+                        actuator.setError(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)))
+                    Else
+                        dxl_error = dynamixel.getLastRxPacketError(dxl_port_num, PROTOCOL_VERSION)
+                        If dxl_error <> 0 Then
+                            actuator.setError(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)))
+                        Else
+
+                            If Math.Abs(actuator.servoGoalPosition - actuator.servoPresentPosition) > DXL_MOVING_STATUS_THRESHOLD Then
+                                stillMoving = True
+                            Else
+                                stillMoving = False
+                            End If
+                            actuator.servoPosition = actuator.servoPresentPosition
+                        End If
+                    End If
+                Next
+
+            Loop While stillMoving
         Catch ex As Exception
             FormHelpers.dumpException(ex)
         End Try
@@ -101,7 +139,7 @@ Public Class robotController
     Public Function ReadPositions() As Boolean
         Try
             For Each actuator In acts.OrderBy(Function(x) x.servoId)
-                dxl_present_position = dynamixel.read2ByteTxRx(dxl_port_num, PROTOCOL_VERSION, Convert.ToByte(actuator.servoId), ADDR_AX_PRESENT_POSITION)
+                actuator.servoPresentPosition = dynamixel.read2ByteTxRx(dxl_port_num, PROTOCOL_VERSION, Convert.ToByte(actuator.servoId), ADDR_AX_PRESENT_POSITION)
                 dxl_comm_result = dynamixel.getLastTxRxResult(dxl_port_num, PROTOCOL_VERSION)
 
                 If dxl_comm_result <> COMM_SUCCESS Then
@@ -111,7 +149,7 @@ Public Class robotController
                     If dxl_error <> 0 Then
                         actuator.setError(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)))
                     Else
-                        actuator.servoPosition = dxl_present_position
+                        actuator.servoPosition = actuator.servoPresentPosition
                     End If
                 End If
             Next
@@ -121,6 +159,33 @@ Public Class robotController
             Return False
         End Try
     End Function
+
+    Public Function WritePositions() As Boolean
+        Try
+            For Each actuator In acts.OrderBy(Function(x) x.servoId)
+                actuator.servoGoalPosition = Convert.ToUInt16(actuator.servoPosition)
+                dynamixel.write2ByteTxRx(dxl_port_num, PROTOCOL_VERSION, Convert.ToByte(actuator.servoId), ADDR_AX_GOAL_POSITION, actuator.servoGoalPosition)
+                dxl_comm_result = dynamixel.getLastTxRxResult(dxl_port_num, PROTOCOL_VERSION)
+
+                If dxl_comm_result <> COMM_SUCCESS Then
+                    actuator.setError(Marshal.PtrToStringAnsi(dynamixel.getTxRxResult(PROTOCOL_VERSION, dxl_comm_result)))
+                Else
+                    dxl_error = dynamixel.getLastRxPacketError(dxl_port_num, PROTOCOL_VERSION)
+                    If dxl_error <> 0 Then
+                        actuator.setError(Marshal.PtrToStringAnsi(dynamixel.getRxPacketError(PROTOCOL_VERSION, dxl_error)))
+                    End If
+                End If
+            Next
+
+            If Not _bgWorker.IsBusy Then _bgWorker.RunWorkerAsync()
+
+            Return True
+        Catch ex As Exception
+            FormHelpers.dumpException(ex)
+            Return False
+        End Try
+    End Function
+
     Public Function TorqueOn() As Boolean
         Return TestActuators()
     End Function
